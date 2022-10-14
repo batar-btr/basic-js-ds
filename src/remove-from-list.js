@@ -29,16 +29,33 @@ class ListNode {
     this.next = null;
   }
 }
+const last = list => {
+  let node = list;
+  while (node.next) {
+      node = node.next;
+  }
+  return node;
+};
+
+
 
 function removeKFromList(l, k) {
-  let result = [];
+  let head = l;
+  let newList = null;
 
-  while(l) {
-    // result ? result.next = l : result = l;
-    l = l.next;
+  while(head) {
+     if(head.value !== k) {
+      if(!newList) {
+          newList = new ListNode(head.value);
+      } else {
+          last(newList).next = new ListNode(head.value);
+      } 
+     }
+      head = head.next;
   }
 
-  return result;
+  return newList;
+ 
 }
 
 module.exports = {
